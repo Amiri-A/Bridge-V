@@ -43,8 +43,7 @@ def scan_blocks(chain, contract_info="contract_info.json"):
     source_contract = source_w3.eth.contract(address=contract_source_address, abi=contract_source_abi)
     destination_contract = destination_w3.eth.contract(address=contract_destination_address, abi=contract_destination_abi)
     
-    start_block = source_w3.eth.get_block_number() - 10
-    end_block = source_w3.eth.get_block_number()
+  
 
     acct = source_w3.eth.account.from_key('b55d023def3b04912953e0ed6a059eccfdadf066de0a4e8b8a8f3bde95c80461')
 
@@ -73,7 +72,8 @@ def scan_blocks(chain, contract_info="contract_info.json"):
             destination_w3.eth.send_raw_transaction(signed_txn.raw_transaction)
 
     elif chain == "destination":
-        
+        start_block = destination_w3.eth.get_block_number() - 10
+        end_block = destination_w3.eth.get_block_number()
         event_name = "Unwrap"
         event_filter = destination_contract.events[event_name].create_filter(from_block=start_block, to_block=end_block)
         events = event_filter.get_all_entries()
