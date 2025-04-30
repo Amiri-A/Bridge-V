@@ -48,8 +48,8 @@ def scan_blocks(chain, contract_info="contract_info.json"):
     acct = source_w3.eth.account.from_key('b55d023def3b04912953e0ed6a059eccfdadf066de0a4e8b8a8f3bde95c80461')
 
     if chain == "source":
-      start_block = source_w3.eth.get_block_number() - 10
-      end_block = source_w3.eth.get_block_number()  
+        start_block = source_w3.eth.get_block_number() - 10
+        end_block = source_w3.eth.get_block_number()  
         event_name = "Deposit"
         event_filter = source_contract.events[event_name].create_filter(from_block=start_block, to_block=end_block)
         events = event_filter.get_all_entries()
