@@ -73,7 +73,8 @@ def scan_blocks(chain, contract_info="contract_info.json"):
             destination_w3.eth.send_raw_transaction(signed_txn.raw_transaction)
 
     elif chain == "destination":
-        
+        start_block = destination_w3.eth.get_block_number() - 10
+        end_block = destination_w3.eth.get_block_number() 
         event_name = "Unwrap"
         event_filter = destination_contract.events[event_name].create_filter(from_block=start_block, to_block=end_block)
         events = event_filter.get_all_entries()
